@@ -91,7 +91,7 @@ Once you are able to execute the command above without errors, you can add us to
 * Go to the menu of your project
 * Click *IAM & admin*
 * Click *Add*
-* Add `ml-engineer-cv-mugs-evaluator@recruiting-220608.iam.gserviceaccount.com`as a member with the role *Project Owner*
+* Add `ml-engineer-cv-mug-evaluator@recruiting-220608.iam.gserviceaccount.com`as a member with the role *Project Owner*
 
 After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/1AmvTI_FEEo-fjyQKSJTqj3H2rqdvtSNty-Nxd0SdiLY) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
 
