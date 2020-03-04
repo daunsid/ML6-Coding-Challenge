@@ -33,7 +33,8 @@ def create_data_with_labels(dataset_dir):
             images.append(img)
             labels.append(label)
 
-    data = np.array([preprocess_image(image) for image in images])
+    data = np.array([preprocess_image(image.astype(np.float32))
+                     for image in images])
     labels = np.array(labels)
 
     return data, labels
@@ -68,6 +69,6 @@ def preprocess_image(image):
     Returns
         image: The preprocessed image.
     """
-    image = (image.astype(np.float32) / 255.)
+    image = image / 255.
 
     return image
