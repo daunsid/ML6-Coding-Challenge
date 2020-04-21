@@ -11,6 +11,9 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+import logging
+logging.getLogger("tensorflow").setLevel(logging.INFO)
+
 import numpy as np
 import tensorflow as tf
 
@@ -120,7 +123,6 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    tf.logging.set_verbosity('INFO')
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
 
     train_and_export_model(args)

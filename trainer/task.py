@@ -10,6 +10,9 @@ It uses the arguments it got via the gcloud command.
 import argparse
 import os
 
+import logging
+logging.getLogger("tensorflow").setLevel(logging.INFO)
+
 import tensorflow as tf
 
 import trainer.data as data
@@ -43,7 +46,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     args = parser.parse_args()
-    tf.compat.v1.logging.set_verbosity('INFO')
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
 
     train_model(args)
