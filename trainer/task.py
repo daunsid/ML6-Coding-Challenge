@@ -11,7 +11,6 @@ import argparse
 import os
 
 import tensorflow as tf
-from tensorflow.contrib.training.python.training import hparam
 
 import trainer.data as data
 import trainer.model as model
@@ -47,5 +46,4 @@ if __name__ == "__main__":
     tf.compat.v1.logging.set_verbosity('INFO')
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
 
-    HPARAMS = hparam.HParams(**args.__dict__)
-    train_model(HPARAMS)
+    train_model(args)
