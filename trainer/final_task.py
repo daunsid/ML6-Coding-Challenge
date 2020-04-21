@@ -6,19 +6,20 @@ This file trains the model upon all data with the arguments it got via
 the gcloud command.
 """
 
-import argparse
 import os
+import argparse
+import logging
+
 from pathlib import Path
 from datetime import datetime
-
-import logging
-logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 import numpy as np
 import tensorflow as tf
 
 import trainer.data as data
 import trainer.model as model
+
+logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def prepare_prediction_image(image_str_tensor):
     """Prepare an image tensor for prediction.
@@ -61,9 +62,9 @@ def export_model(ml_model, export_dir, model_dir='exported_model'):
 
     prediction_output = ml_model(prediction_output)
     prediction_output = tf.keras.layers.Lambda(
-        lambda  x: x, name='PROBABILITIES')(prediction_output)
+        lambda x: x, name='PROBABILITIES')(prediction_output)
     prediction_class = tf.keras.layers.Lambda(
-        lambda  x: tf.argmax(x, 1), name='CLASSES')(prediction_output)
+        lambda x: tf.argmax(x, 1), name='CLASSES')(prediction_output)
     
     ml_model = tf.keras.models.Model(prediction_input, outputs=[prediction_class, prediction_output])
 

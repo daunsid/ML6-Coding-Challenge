@@ -7,16 +7,16 @@ the eval data.
 It uses the arguments it got via the gcloud command.
 """
 
-import argparse
 import os
-
+import argparse
 import logging
-logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 import tensorflow as tf
 
 import trainer.data as data
 import trainer.model as model
+
+logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def train_model(params):
     """The function gets the training data from the training folder,
