@@ -7,14 +7,16 @@ the eval data.
 It uses the arguments it got via the gcloud command.
 """
 
-import argparse
 import os
+import argparse
+import logging
 
 import tensorflow as tf
-from tensorflow.contrib.training.python.training import hparam
 
 import trainer.data as data
 import trainer.model as model
+
+logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def train_model(params):
     """The function gets the training data from the training folder,
@@ -44,8 +46,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     args = parser.parse_args()
-    tf.compat.v1.logging.set_verbosity('INFO')
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
 
-    HPARAMS = hparam.HParams(**args.__dict__)
-    train_model(HPARAMS)
+    train_model(args)

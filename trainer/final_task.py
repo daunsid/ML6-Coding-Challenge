@@ -6,17 +6,20 @@ This file trains the model upon all data with the arguments it got via
 the gcloud command.
 """
 
-import argparse
 import os
+import argparse
+import logging
+
 from pathlib import Path
 from datetime import datetime
 
 import numpy as np
 import tensorflow as tf
-from tensorflow.contrib.training.python.training import hparam
 
 import trainer.data as data
 import trainer.model as model
+
+logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def prepare_prediction_image(image_str_tensor):
     """Prepare an image tensor for prediction.
@@ -51,39 +54,26 @@ def export_model(ml_model, export_dir, model_dir='exported_model'):
         model_dir: A string specifying the name of the directory to
             which the model is written.
     """
-    optimizer = ml_model.optimizer
-    loss = ml_model.loss_functions
-    metrics = ml_model.metrics
-
     ml_model.layers.pop(0)
     prediction_input = tf.keras.Input(
-        dtype=tf.string, name='prediction_image', shape=())
+        dtype=tf.string, name='bytes', shape=())
     prediction_output = tf.keras.layers.Lambda(
         prepare_prediction_image_batch)(prediction_input)
-    prediction_output = ml_model(prediction_output)
-    ml_model = tf.keras.models.Model(prediction_input, prediction_output)
-    weights = ml_model.get_weights()
 
-    ml_model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
+    prediction_output = ml_model(prediction_output)
+    prediction_output = tf.keras.layers.Lambda(
+        lambda x: x, name='PROBABILITIES')(prediction_output)
+    prediction_class = tf.keras.layers.Lambda(
+        lambda x: tf.argmax(x, 1), name='CLASSES')(prediction_output)
+    
+    ml_model = tf.keras.models.Model(prediction_input, outputs=[prediction_class, prediction_output])
 
     model_path = Path(export_dir) / model_dir
     if model_path.exists():
         timestamp = datetime.now().strftime("-%Y-%m-%d-%H-%M-%S")
         model_path = Path(str(model_path) + timestamp)
 
-    with tf.compat.v1.Session() as sess:
-        init_op = tf.group(tf.compat.v1.global_variables_initializer(),
-                           tf.compat.v1.local_variables_initializer())
-        sess.run(init_op)
-        ml_model.set_weights(weights)
-
-        inputs = {"bytes": ml_model.input}
-        outputs = {
-            "CLASSES": tf.argmax(ml_model.output, 1),
-            "PROBABILITIES": ml_model.output,
-        }
-        tf.compat.v1.saved_model.simple_save(sess, str(model_path),
-                                             inputs, outputs)
+    tf.saved_model.save(ml_model, str(model_path))
 
 def train_and_export_model(params):
     """The function gets the training data from the training folder and
@@ -121,8 +111,6 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    tf.logging.set_verbosity('INFO')
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
 
-    HPARAMS = hparam.HParams(**args.__dict__)
-    train_and_export_model(HPARAMS)
+    train_and_export_model(args)
