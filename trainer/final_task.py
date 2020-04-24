@@ -19,7 +19,6 @@ import tensorflow as tf
 import trainer.data as data
 import trainer.model as model
 
-logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def prepare_prediction_image(image_str_tensor):
     """Prepare an image tensor for prediction.
@@ -91,7 +90,7 @@ def train_and_export_model(params):
     train_data = np.append(train_data, eval_data, axis=0)
     train_labels = np.append(train_labels, eval_labels, axis=0)
 
-    n_train_data, img_shape = train_data.shape[:1], train_data.shape[1:]
+    img_shape = train_data.shape[1:]
     input_layer = tf.keras.Input(shape=img_shape, name='input_image')
 
     ml_model = model.solution(input_layer)
@@ -111,6 +110,8 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
+    tf_logger = logging.getLogger("tensorflow")
+    tf_logger.setLevel(logging.INFO)
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf_logger.level / 10)
 
     train_and_export_model(args)

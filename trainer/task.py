@@ -16,7 +16,6 @@ import tensorflow as tf
 import trainer.data as data
 import trainer.model as model
 
-logging.getLogger("tensorflow").setLevel(logging.INFO)
 
 def train_model(params):
     """The function gets the training data from the training folder,
@@ -29,7 +28,7 @@ def train_model(params):
     (train_data, train_labels) = data.create_data_with_labels("data/train/")
     (eval_data, eval_labels) = data.create_data_with_labels("data/eval/")
 
-    n_train_data, img_shape = train_data.shape[:1], train_data.shape[1:]
+    img_shape = train_data.shape[1:]
     input_layer = tf.keras.Input(shape=img_shape, name='input_image')
 
     ml_model = model.solution(input_layer)
@@ -40,12 +39,14 @@ def train_model(params):
         ml_model.fit(train_data, train_labels,
                      batch_size=model.get_batch_size(),
                      epochs=model.get_epochs())
-        score = ml_model.evaluate(eval_data, eval_labels, verbose=1)
+        ml_model.evaluate(eval_data, eval_labels, verbose=1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     args = parser.parse_args()
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf.logging.__dict__['INFO'] / 10)
+    tf_logger = logging.getLogger("tensorflow")
+    tf_logger.setLevel(logging.INFO)
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(tf_logger.level / 10)
 
     train_model(args)
