@@ -53,7 +53,6 @@ def export_model(ml_model, export_dir, model_dir='exported_model'):
         model_dir: A string specifying the name of the directory to
             which the model is written.
     """
-    ml_model.layers.pop(0)
     prediction_input = tf.keras.Input(
         dtype=tf.string, name='bytes', shape=())
     prediction_output = tf.keras.layers.Lambda(

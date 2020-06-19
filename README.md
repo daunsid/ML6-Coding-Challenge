@@ -5,6 +5,11 @@ Completing the test should take about half a day if you have the relevant experi
 
 In this test, you will try to classify the mugs we drink from at ML6. If you are able to complete this test in a decent way, you might soon be drinking coffee from the black ML6 mugs (which is also in the data) together with us.
 
+You can start by cloning this repository to a local and/or private location via:
+
+```
+git clone git@bitbucket.org:ml6team/challenge-find-ml6-mug.git
+```
 
 ## The Data
 

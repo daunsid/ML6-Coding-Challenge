@@ -32,7 +32,7 @@ def solution(input_layer):
     Add your solution below.
 
     Parameters:
-        input_layer: An input layer specifying the shape of the input.
+        input_layer: A tf.keras.layers.InputLayer() specifying the shape of the input.
             RGB colored images, shape: (width, height, 3)
     Returns:
         model: A compiled model
