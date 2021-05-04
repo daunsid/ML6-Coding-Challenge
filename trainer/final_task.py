@@ -49,9 +49,10 @@ def export_model(ml_model, export_dir, model_dir='exported_model'):
 
     Parameters:
         ml_model: A compiled model
-        export_dir: A string specifying the
-        model_dir: A string specifying the name of the directory to
+        export_dir: A string specifying the name of the path to
             which the model is written.
+        model_dir: A string specifying the name of the parent directory 
+            to which the model is written.
     """
     prediction_input = tf.keras.Input(
         dtype=tf.string, name='bytes', shape=())
