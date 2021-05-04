@@ -61,7 +61,7 @@ Once you've executed this command, you will notice that the `output` folder was 
 
 In order to do so you will need to create a [Google Cloud account](https://cloud.google.com/). You will need a credit card for this, but you'll get free credit from Google to run your AI Platform instance.
 
-Once you've created your Google Cloud account, you'll need to deploy your model on a project you've created. You can follow a [Google Guide](https://cloud.google.com/ai-platform/prediction/docs/deploying-models#deploy_models_and_versions) for this. Make sure to deploy the model using Tensorflow 2.1 and use **`europe-west1` as the regional endpoint**.
+Once you've created your Google Cloud account, you'll need to deploy your model on a project you've created. You can follow a [Google Guide](https://cloud.google.com/ai-platform/prediction/docs/deploying-models#deploy_models_and_versions) for this. Make sure to deploy the model using Tensorflow 2.1 and we advice to use **`europe-west1` as the regional endpoint** if available. Note that the region of the bucket should correspond to the region of the model.
 
 
 ## Checking your Deployed Model
