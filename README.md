@@ -59,7 +59,7 @@ gcloud ai-platform local train \
 
 Once you've executed this command, you will notice that the `output` folder was created in the root directory of this repository. This folder contains your saved model that you'll need to deploy to Google Cloud AI Platform.
 
-In order to do so you will need to create a [Google Cloud account](https://cloud.google.com/). You will need a credit card for this, but you'll get free credit from Google to run your AI Platform instance.
+In order to do so you will need to create a [Google Cloud account](https://cloud.google.com/). You will need a credit card for this, but you'll get [free credit from Google](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial) to run your AI Platform instance. **Note:** if you are not eligible for the free trial please reach out to us as you are responsible for the costs associated with the project.
 
 Once you've created your Google Cloud account, you'll need to deploy your model on a project you've created. You can follow a [Google Guide](https://cloud.google.com/ai-platform/prediction/docs/deploying-models#deploy_models_and_versions) for this. Make sure to deploy the model using Tensorflow 2.1 and we advice to use **`europe-west1` as the regional endpoint** if available. Note that the region of the bucket should correspond to the region of the model.
 
@@ -91,7 +91,7 @@ The values you use for the `$MODEL_NAME` variable and the `$VERSION` variable ca
 To be able to pass the coding test. You should be able to get an accuracy of 75% on our secret dataset of mugs (which you don't have access to). If your accuracy however seems to be less than 75% after we evaluated it, you can just keep submitting solutions until you are able to get an accuracy of 75%.
 
 
-### Submitting your Coding Test
+## Submitting your Coding Test
 
 Once you are able to execute the command above without errors, you can add us to your project:
 
@@ -103,3 +103,8 @@ Once you are able to execute the command above without errors, you can add us to
 After you added us to your project you should fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLScW6ytY3_4yoKE39-Gd-U7WHo030YtwdggTG1D_yIQPlL7Vjg/viewform) so we are able to automatically evaluate your solution to the coding test. Once you've filled in the form you should receive an email with the results within 2 hours. We'll hope with you that your results are good enough to land an interview at ML6. If however you don't you can resubmit a new solution as many times as you want, so don't give up!
 
 If you are invited for an interview at ML6 afterwards, make sure to bring your laptop with a copy of the code you wrote, so you can explain your `model.py` file to us.
+
+
+### Taking down the deployed model
+
+After you have received the evaluation email, we no longer require access to the model. Please check the corresponding documentation page for removing AI Platform models. This can be done via the UI or the command line.
