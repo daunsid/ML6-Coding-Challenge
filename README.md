@@ -1,7 +1,6 @@
 Hello potential ML6 colleague!
 
-If you are reading this, you are probably applying for a Machine Learning engineering job at ML6. This test will evaluate if you have the right skills for the job.
-Completing the test should take about half a day if you have the relevant experience.
+If you are reading this, you are probably applying for a Machine Learning engineering job at ML6. This test will evaluate if you have the right skills for the job. The time needed to complete this challenge depends on your experience and can range from half a day to multiple tries over a week.
 
 In this test, you will try to classify the mugs we drink from at ML6. If you are able to complete this test in a decent way, you might soon be drinking coffee from the black ML6 mugs (which is also in the data) together with us.
 
